@@ -17,7 +17,7 @@ const Header = () => {
             <div className="navbar-end">
                 <div className='hidden lg:block'>
                     <Link to='/' className='mr-4'><button className="btn btn-ghost">Home</button></Link>
-                    <Link to='/blogs' className='mr-4'><button className="btn btn-ghost">Blogs</button></Link>
+                    <Link to='/login' className='mr-4'><button className="btn btn-ghost">login</button></Link>
                     {/* {
                         user?.uid ?
                             <>
@@ -35,7 +35,7 @@ const Header = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to='/' className='mr-6'>Home</Link></li>
-                        <li><Link to='/blogs' className='mr-6'>Blogs</Link></li>
+                        <li><Link to='/login' className='mr-6'>login</Link></li>
                         {/* {
                             user?.uid ?
                                 <>
