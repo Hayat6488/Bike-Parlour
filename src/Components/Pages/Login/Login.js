@@ -1,11 +1,24 @@
-import React from 'react';
-import { FaFacebook } from 'react-icons/fa'
+import React, { useContext } from 'react';
 import { FcGoogle } from 'react-icons/fc'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 
 const Login = () => {
+
+    const { signInByGoogle, setUser } = useContext(AuthContext);
+
+    const handleGoogleSignIn = () => {
+        signInByGoogle()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setUser(user);
+            })
+            .catch(error => console.error('error: ', error))
+    }
+
     return (
-        <div className='w-full'>
+        <div className='w-full mt-6'>
             <div className='flex justify-center items-center'>
                 <div className='bg-white px-16 py-8 rounded-lg shadow-lg shadow-indigo-500/40'>
                     <form className='mb-4'>
@@ -30,8 +43,7 @@ const Login = () => {
                     <hr />
                     <h1 className='text-2xl font-semibold mt-4 mb-4'>Log In With</h1>
                     <div className='grid grid-cols-1 gap-2'>
-                        <button className="btn btn-outline text-xl"><FcGoogle className='mr-1'></FcGoogle> Log In By Google</button>
-                        <button className="btn btn-outline text-xl text-sky-800"><FaFacebook className='mr-1'></FaFacebook>Log In By Facebook</button>
+                        <button onClick={handleGoogleSignIn} className="btn btn-outline text-xl"><FcGoogle className='mr-1'></FcGoogle> Log In By Google</button>
                     </div>
                 </div>
             </div>
