@@ -5,10 +5,27 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 const Register = () => {
 
-    const { signInByGoogle, setUser } = useContext(AuthContext);
+    const { signInByGoogle, setUser, signUp } = useContext(AuthContext);
 
     const handleGoogleSignIn = () => {
         signInByGoogle()
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+            })
+            .catch(error => console.error('error: ', error))
+    }
+
+    const handRegister = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const password = form.password.value;
+        const email = form.email.value;
+
+        console.log(email, password, name);
+
+        signUp(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
@@ -19,11 +36,11 @@ const Register = () => {
 
     return (
         <div className='w-full'>
-            <div class="flex justify-center items-center">
+            <div className="flex justify-center items-center">
             </div>
             <div className='flex justify-center items-center'>
                 <div className='bg-white px-16 py-8 rounded-lg shadow-lg shadow-indigo-500/40'>
-                    <form className='mb-4'>
+                    <form onSubmit={handRegister} className='mb-4'>
                         <h1 className='text-3xl font-semibold'>Register</h1>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                             <div>
@@ -46,9 +63,9 @@ const Register = () => {
                             </div>
                             <div>
                                 <label className="label">
-                                    <span className="label-text text-2xl">Image URL: </span>
+                                    <span className="label-text text-2xl">Profile Picture</span>
                                 </label>
-                                <input type="text" placeholder="IMAGE URL" className="input input-bordered input-accent w-56 md:w-72" name='img' />
+                                <input type="file" placeholder="IMAGE URL" className="mt-2" name='img' />
                             </div>
                         </div>
                         <button type="submit" className='btn btn-outline btn-success mt-4 px-8 py-2 text-xl'>SUBMIT</button>
