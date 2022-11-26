@@ -15,7 +15,7 @@ const Header = () => {
     }
 
     return (
-        <div className="navbar bg-base-200 px-10">
+        <div className="navbar bg-white px-10">
             <div className="navbar-start">
                 <img src={logo} className="h-10" alt="" />
                 <Link to='/'><h1 className='text-3xl font-semibold'>BIKE PARLOUR</h1></Link>
