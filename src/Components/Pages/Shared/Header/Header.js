@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../Assets/photo_6055203949880914485_x-removebg-preview (2).png'
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const Header = () => {
 
-    const handleLogOut = () => {
+    const {user, logOut} = useContext(AuthContext);
 
+    const handleLogOut = () => {
+        logOut()
+            .then(result => {
+            })
+            .catch(error => console.error('error: ', error))
     }
 
     return (
@@ -18,7 +24,7 @@ const Header = () => {
                 <div className='hidden lg:block'>
                     <Link to='/' className='mr-4'><button className="btn btn-ghost">Home</button></Link>
                     <Link to='/login' className='mr-4'><button className="btn btn-ghost">login</button></Link>
-                    {/* {
+                    {
                         user?.uid ?
                             <>
                                 <Link to='/myreviews' className='mr-4'><button className="btn btn-ghost">MY REVIEWS</button></Link>
@@ -27,7 +33,7 @@ const Header = () => {
                             </>
                             :
                             <Link to='/login' className='mr-6'><button className="btn btn-ghost">LOG IN</button></Link>
-                    } */}
+                    }
                 </div>
                 <div className="dropdown  dropdown-end lg:hidden">
                     <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -36,7 +42,7 @@ const Header = () => {
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to='/' className='mr-6'>Home</Link></li>
                         <li><Link to='/login' className='mr-6'>login</Link></li>
-                        {/* {
+                        {
                             user?.uid ?
                                 <>
                                     <li><Link to='/myreviews' className='mr-4'>MY REVIEWS</Link></li>
@@ -45,7 +51,7 @@ const Header = () => {
                                 </>
                                 :
                                 <li><Link to='/login' className='mr-6'>LOG IN</Link></li>
-                        } */}
+                        }
                     </ul>
                 </div>
             </div>

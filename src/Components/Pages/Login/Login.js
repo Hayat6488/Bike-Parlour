@@ -28,8 +28,6 @@ const Login = () => {
         const password = form.password.value;
         const email = form.email.value;
 
-        console.log(email, password);
-
         login(email, password)
             .then(result => {
                 const user = result.user;
