@@ -5,7 +5,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 const Login = () => {
 
-    const { signInByGoogle, setUser } = useContext(AuthContext);
+    const { signInByGoogle, setUser, login } = useContext(AuthContext);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -22,11 +22,28 @@ const Login = () => {
             .catch(error => console.error('error: ', error))
     }
 
+    const handleLogIn = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const password = form.password.value;
+        const email = form.email.value;
+
+        console.log(email, password);
+
+        login(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setUser(user);
+            })
+            .catch(error => console.error('error: ', error))
+    }
+
     return (
         <div className='w-full mt-6'>
             <div className='flex justify-center items-center'>
                 <div className='bg-white px-16 py-8 rounded-lg shadow-lg shadow-indigo-500/40'>
-                    <form className='mb-4'>
+                    <form onSubmit={handleLogIn} className='mb-4'>
                         <h1 className='text-3xl font-semibold'>Log In</h1>
                         <div className='grid grid-cols-1 gap-4'>
                             <div className='flex flex-col justify-start'>
