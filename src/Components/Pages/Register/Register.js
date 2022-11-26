@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 import { AuthContext } from '../../Context/AuthProvider';
 
 const Register = () => {
+
+    const [img, setImg] = useState();
 
     const { signInByGoogle, setUser, signUp } = useContext(AuthContext);
 
@@ -22,12 +24,40 @@ const Register = () => {
         const name = form.name.value;
         const password = form.password.value;
         const email = form.email.value;
+        const image = form.img.files[0];
+        const role = form.role.value;
 
-        console.log(email, password, name);
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = "https://api.imgbb.com/1/upload?key=047745c250b2bedf1b2b864ff6999ae2"
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+        })
+            .then(res => res.json())
+            .then(data => setImg(data.data.url))
+
+        const saveUser= () => {
+            const user = {
+                name: name,
+                email: email,
+                image: img,
+                role: role
+            }
+            fetch(`http://localhost:5000/users`, {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+        }
 
         signUp(email, password)
             .then(result => {
                 const user = result.user;
+                saveUser();
                 console.log(user);
                 setUser(user);
             })
@@ -60,6 +90,15 @@ const Register = () => {
                                     <span className="label-text text-2xl">Password: </span>
                                 </label>
                                 <input type="Password" placeholder="PASSWORD" className="input input-bordered input-accent w-56 md:w-72" name='password' />
+                            </div>
+                            <div>
+                                <label className="label">
+                                    <span className="label-text text-2xl">Password: </span>
+                                </label>
+                                <select className="select select-bordered select-accent w-full max-w-xs" name='role'>
+                                    <option default>Buyer</option>
+                                    <option>Seller</option>
+                                </select>
                             </div>
                             <div>
                                 <label className="label">
