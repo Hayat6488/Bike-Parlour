@@ -7,6 +7,8 @@ const Header = () => {
 
     const {user, logOut} = useContext(AuthContext);
 
+    const isAdmin = true;
+
     const handleLogOut = () => {
         logOut()
             .then(result => {
@@ -26,8 +28,7 @@ const Header = () => {
                     {
                         user?.uid ?
                             <>
-                                <Link to='/myreviews' className='mr-4'><button className="btn btn-ghost">MY REVIEWS</button></Link>
-                                <Link to='/addfoods' className='mr-4'><button className="btn btn-ghost">ADD FOODS</button></Link>
+                                <Link to='/dashboard' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>
                                 <button onClick={handleLogOut} className="btn btn-ghost mr-4">LOG OUT</button>
                             </>
                             :

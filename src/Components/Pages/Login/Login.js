@@ -16,7 +16,7 @@ const Login = () => {
         signInByGoogle()
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                navigate('/');
                 setUser(user);
             })
             .catch(error => console.error('error: ', error))
@@ -34,6 +34,7 @@ const Login = () => {
                 const uid = (user.uid);
                 getUserToken(uid)
                 setUser(user);
+                navigate('/');
             })
             .catch(error => console.error('error: ', error))
 
