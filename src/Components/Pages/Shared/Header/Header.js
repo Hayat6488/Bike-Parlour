@@ -23,7 +23,6 @@ const Header = () => {
             <div className="navbar-end">
                 <div className='hidden lg:block'>
                     <Link to='/' className='mr-4'><button className="btn btn-ghost">Home</button></Link>
-                    <Link to='/login' className='mr-4'><button className="btn btn-ghost">login</button></Link>
                     {
                         user?.uid ?
                             <>

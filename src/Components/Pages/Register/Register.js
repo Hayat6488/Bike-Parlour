@@ -38,12 +38,13 @@ const Register = () => {
             .then(res => res.json())
             .then(data => setImg(data.data.url))
 
-        const saveUser= () => {
+        const saveUser= (uid) => {
             const user = {
                 name: name,
                 email: email,
                 image: img,
-                role: role
+                role: role,
+                uid: uid
             }
             fetch(`http://localhost:5000/users`, {
                 method: "POST",
@@ -57,11 +58,23 @@ const Register = () => {
         signUp(email, password)
             .then(result => {
                 const user = result.user;
-                saveUser();
+                const uid = user.uid;
+                saveUser(uid);
+                getUserToken(uid)
                 console.log(user);
                 setUser(user);
             })
             .catch(error => console.error('error: ', error))
+
+        const getUserToken = uid => {
+            fetch(`http://localhost:5000/jwts?uid=${uid}`)
+            .then(res => res.json())
+            .then(data => {
+                if(data?.accessToken){
+                    localStorage.setItem('accessToken', data.accessToken);
+                }
+            })
+        }
     }
 
     return (
