@@ -14,9 +14,9 @@ const SideBar = () => {
                 {
                     isAdmin &&
                     <>
-                        <li className='bg-white mb-2 rounded-3xl'><Link>All Buyers</Link></li>
-                        <li className='bg-white mb-2 rounded-3xl'><Link>All Sellers</Link></li>
-                        <li className='bg-white mb- rounded-3xl'><Link>Reported Items</Link></li>
+                        <li className='bg-white mb-2 rounded-3xl'><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
+                        <li className='bg-white mb-2 rounded-3xl'><Link to='/dashboard/allsellers'>All Sellers</Link></li>
+                        <li className='bg-white mb- rounded-3xl'><Link to='/dashboard/reporteditems'>Reported Items</Link></li>
                     </>
                 }
                 {
