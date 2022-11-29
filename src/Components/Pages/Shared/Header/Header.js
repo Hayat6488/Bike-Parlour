@@ -5,9 +5,12 @@ import { AuthContext } from '../../../Context/AuthProvider';
 
 const Header = () => {
 
-    const {user, logOut} = useContext(AuthContext);
+    const isAdmin = false;
+    const isBuyer = false;
+    const isSeller = true;
+    
 
-    const isAdmin = true;
+    const {user, logOut} = useContext(AuthContext);
 
     const handleLogOut = () => {
         logOut()
@@ -28,7 +31,9 @@ const Header = () => {
                     {
                         user?.uid ?
                             <>
-                                <Link to='/dashboard' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>
+                                {isAdmin && <Link to='/dashboard/allsellers' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                {isBuyer && <Link to='/dashboard/myorders' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                {isSeller && <Link to='/dashboard/myproducts' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
                                 <button onClick={handleLogOut} className="btn btn-ghost mr-4">LOG OUT</button>
                             </>
                             :

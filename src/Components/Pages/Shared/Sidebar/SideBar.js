@@ -10,7 +10,7 @@ const SideBar = () => {
     return (
         <div className='mt-10 lg:mt-0 rounded-md'>
             <ul className="menu w-56 p-2">
-                {isBuyer && <li className='bg-white mb-2 rounded-3xl'><Link>My Orders</Link></li>}
+                {isBuyer && <li className='bg-white mb-2 rounded-3xl'><Link to='/dashboard/myorders'>My Orders</Link></li>}
                 {
                     isAdmin &&
                     <>
@@ -22,8 +22,8 @@ const SideBar = () => {
                 {
                     isSeller &&
                     <>
-                        <li className='bg-white mb-2 rounded-3xl'><Link>Add a Product</Link></li>
-                        <li className='bg-white mb-2 rounded-3xl'><Link>My Products</Link></li>
+                        <li className='bg-white mb-2 rounded-3xl'><Link to='/dashboard/myproducts'>My Products</Link></li>
+                        <li className='bg-white mb-2 rounded-3xl'><Link to='/dashboard/addproduct'>Add Product</Link></li>
                     </>
                 }
             </ul>
