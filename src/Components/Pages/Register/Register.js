@@ -53,6 +53,10 @@ const Register = () => {
                 },
                 body: JSON.stringify(user)
             })
+            .then(res => res.json())
+            .then(data => {
+                getUser(uid);
+            })
         }
 
         signUp(email, password)
@@ -60,11 +64,18 @@ const Register = () => {
                 const user = result.user;
                 const uid = user.uid;
                 saveUser(uid);
-                getUserToken(uid)
-                console.log(user);
-                setUser(user);
+                getUserToken(uid);
+                form.reset();
             })
             .catch(error => console.error('error: ', error))
+
+        const getUser = (uid) => {
+            fetch(`http://localhost:5000/user?uid=${uid}`)
+            .then(res => res.json())
+            .then(data => {
+                setUser(data[0]);
+            })
+        }
 
         const getUserToken = uid => {
             fetch(`http://localhost:5000/jwts?uid=${uid}`)
