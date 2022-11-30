@@ -32,11 +32,20 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 const uid = (user.uid);
-                getUserToken(uid)
-                setUser(user);
+                getUserToken(uid);
+                getUser(uid);
                 navigate('/');
             })
             .catch(error => console.error('error: ', error))
+
+
+        const getUser = (uid) => {
+            fetch(`http://localhost:5000/user?uid=${uid}`)
+                .then(res => res.json())
+                .then(data => {
+                    setUser(data[0]);
+                })
+        }
 
         const getUserToken = uid => {
             fetch(`http://localhost:5000/jwt?uid=${uid}`)
