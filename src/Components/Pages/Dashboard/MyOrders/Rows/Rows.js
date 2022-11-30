@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Rows = ({ bike }) => {
 
-    const {product, price, img, _id} = bike;
+    const { product, price, img, _id } = bike;
 
     return (
         <tr>
@@ -23,27 +24,17 @@ const Rows = ({ bike }) => {
                     <div className="font-bold">{price}</div>
                 </div>
             </td>
-            {/* {
-                product.sold ?
+            {
+                bike.paid ?
                     <td className="font-bold">
-                        <span className='ml-4'>Sold</span>
+                        <span className='ml-4 text-green-600'>Paid</span>
                     </td>
                     :
-                    !product.sold &&
-                        product.advertise ?
-                        <td className="font-bold">
-                            <span className='ml-4 text-green-500'>Advertised</span>
-                        </td>
-                        :
-                        <td>
-                            <button onClick={() => handleadvertise(_id)} className="btn btn-ghost btn-xs"><span className="font-bold">ADVERTISE</span></button>
-                        </td>
+                    <td>
+                        <Link to={`/dashboard/myorders/${_id}`}><button className="btn btn-ghost btn-xs"><span className="font-bold">Proceed to Pay</span></button></Link>
+                    </td>
 
-            } */}
-
-            <th>
-                <button className="btn btn-ghost btn-xs"><span className="font-bold">DELETE</span></button>
-            </th>
+            }
         </tr>
     );
 };
