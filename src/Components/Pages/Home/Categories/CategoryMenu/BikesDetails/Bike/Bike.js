@@ -25,13 +25,15 @@ const Bikes = ({ bike }) => {
             name: name,
             email: email,
             product: product,
+            productId: _id,
             price: price,
             number: number,
             meet: meet,
-            uid: user.uid
+            uid: user.uid,
+            img: img
         }
 
-        fetch('http://localhost:5000/selected', {
+        fetch('http://localhost:5000/myorders', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

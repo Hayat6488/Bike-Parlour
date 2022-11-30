@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const SideBar = () => {
 
-    const isBuyer = false;
+    const isBuyer = true;
     const isAdmin = false;
-    const isSeller = true;
+    const isSeller = false;
 
     return (
         <div className='mt-10 lg:mt-0 rounded-md'>

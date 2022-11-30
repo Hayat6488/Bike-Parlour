@@ -10,7 +10,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext);
 
     const { data: products, refetch,  isLoading } = useQuery({
-        queryKey: ['myproducts', ignored],
+        queryKey: ['myproducts', ignored, user?.uid],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/myproducts?uid=${user?.uid}`);
             const data = await res.json();
