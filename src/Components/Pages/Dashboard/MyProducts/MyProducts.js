@@ -1,22 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useReducer } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../Context/AuthProvider';
 import Row from './Row/Row';
 
 const MyProducts = () => {
 
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+
     const { user } = useContext(AuthContext);
 
-    const { data: products, isLoading } = useQuery({
-        queryKey: [user?.uid],
+    const { data: products, refetch,  isLoading } = useQuery({
+        queryKey: ['myproducts', ignored],
         queryFn: async () => {
             const res = await fetch(`http://localhost:5000/myproducts?uid=${user?.uid}`);
             const data = await res.json();
             return data;
         }
     })
-
-    console.log(products);
 
     return (
         <div className='flex justify-center w-full'>
@@ -32,7 +32,7 @@ const MyProducts = () => {
                     </thead>
                     <tbody>
                         {
-                            products?.map(product => <Row key={product.id} product={product}></Row>)
+                            products?.map(product => <Row key={product._id} product={product} forceUpdate={forceUpdate}></Row>)
                         }
                     </tbody>
                     <tfoot>
