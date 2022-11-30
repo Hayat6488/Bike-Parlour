@@ -23,9 +23,14 @@ const Row = ({ product }) => {
                             <div className="font-bold">{price}</div>
                         </div>
                 </td>
-                <td>unsold</td>
+                {
+                    !product.advertise ? 
+                    <td className="font-bold">Sold</td>
+                    :
+                    <td className="font-bold"><button className="btn btn-ghost btn-xs"><span className="font-bold">Advertise</span></button></td>
+                }
                 <th>
-                    <button className="btn btn-ghost btn-xs">DELETE</button>
+                    <button className="btn btn-ghost btn-xs"><span className="font-bold">DELETE</span></button>
                 </th>
             </tr>
     );
