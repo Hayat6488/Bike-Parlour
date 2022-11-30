@@ -8,16 +8,20 @@ const Categories = () => {
 
     useEffect(() => {
         axios.get('http://localhost:5000/categories')
-        .then(data => {
-            setCategories(data.data);
-        });
-    },[])
+            .then(data => {
+                setCategories(data.data);
+            });
+    }, [])
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-12 mx-8 gap-3'>
-            {
-                categories.map(category => <CategoryMenu key={category._id} category={category}></CategoryMenu>)
-            }
+        <div className='mx-36 mt-16'>
+            <h1 className='text-3xl font-semibold mb-8'>Types of Bikes We Provide</h1>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3'>
+
+                {
+                    categories.map(category => <CategoryMenu key={category._id} category={category}></CategoryMenu>)
+                }
+            </div>
         </div>
     );
 };

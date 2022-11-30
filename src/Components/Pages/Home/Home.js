@@ -1,4 +1,5 @@
 import React from 'react';
+import Advertised from './Advertised/Advertised';
 import Carousel from './Carousel/Carousel';
 import Categories from './Categories/Categories';
 
@@ -7,6 +8,7 @@ const Home = () => {
         <div>
             <Carousel></Carousel>
             <Categories></Categories>
+            <Advertised></Advertised>
         </div>
     );
 };

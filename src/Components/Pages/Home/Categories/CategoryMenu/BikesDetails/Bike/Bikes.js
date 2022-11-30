@@ -9,6 +9,8 @@ const Bikes = ({ bike }) => {
 
     const { user } = useContext(AuthContext);
 
+    console.log(bike);
+
     const { buyPrice, condition, date, des, img, location, name, number, price, used, year, _id, sellerName } = bike;
 
     const handleBooking = event => {
