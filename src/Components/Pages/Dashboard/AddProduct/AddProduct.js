@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
 
@@ -7,10 +7,6 @@ const AddProduct = () => {
 
 
     const navigate = useNavigate();
-
-    const showToast = () => {
-        toast('Here is your toast.');
-    };
 
     const { user } = useContext(AuthContext);
 
@@ -76,7 +72,7 @@ const AddProduct = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    showToast();
+                    toast.success('Product Added Successfully.')
                     form.reset();
                     navigate('/dashboard/myproducts')
                 })
@@ -173,20 +169,6 @@ const AddProduct = () => {
                     </form>
                 </div>
             </div>
-
-            {/* TOAST */}
-
-            <Toaster
-                toastOptions={{
-                    className: '',
-                    style: {
-                        margin: '50px',
-                        border: '1px solid #713200',
-                        padding: '16px',
-                        color: '#713200',
-                    },
-                }}
-            />
 
 
         </div>
