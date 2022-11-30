@@ -1,17 +1,49 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../../../Context/AuthProvider';
 
-const Bikes = ({ bike }) => {
+const Bikes = ({ bike, bikes, index }) => {
+
+    const [bikeDetails, setBikeDetails] = useState([]);
 
     const navigate = useNavigate();
 
     const { user } = useContext(AuthContext);
 
+    const { buyPrice, condition, date, des, img, location, name, number, price, used, year, _id, sellerName } = bike;
+
     console.log(bike);
 
-    const { buyPrice, condition, date, des, img, location, name, number, price, used, year, _id, sellerName } = bike;
+    console.log(bikes);
+
+
+    const filterData = (bikeId) => {
+        var result = bikes.filter(obj => {
+            return obj._id === bikeId;
+        })
+        setBikeDetails(result);
+        console.log(bikeDetails);
+    }
+
+    const bikeName = document.querySelector("#bikeName");
+    const bikePrice = document.querySelector("#bikePrice");
+
+    console.log(bikeName);
+    console.log(bikePrice);
+
+    if (bikeName) {
+        bikeName.defaultValue = bikeDetails[0]?.name;
+    }
+
+    if (bikePrice) {
+        bikePrice.defaultValue = bikeDetails[0]?.price;
+    }
+
+
+    console.log(bikeDetails[0]?.name);
+
+
 
     const handleBooking = event => {
         event.preventDefault();
@@ -75,7 +107,7 @@ const Bikes = ({ bike }) => {
                     </div>
                     <h1 className='text-lg font-semibold'>{des}</h1>
                     <div className="card-actions">
-                        <label htmlFor="bookNow" className="btn btn-primary">Book Now</label>
+                        <label onClick={() => filterData(_id)} htmlFor="bookNow" className="btn btn-primary">Book Now</label>
                     </div>
                 </div>
             </div>
@@ -106,13 +138,13 @@ const Bikes = ({ bike }) => {
                                 <label className="label">
                                     <span className="label-text text-2xl">Product: </span>
                                 </label>
-                                <input type="text" readOnly defaultValue={name} className="input input-bordered input-accent w-56 md:w-72" name='product' />
+                                <input type="text" readOnly id="bikeName" defaultValue={bikeDetails[0]?.name} className="input input-bordered input-accent w-56 md:w-72" name='product' />
                             </div>
                             <div>
                                 <label className="label">
                                     <span className="label-text text-2xl">Price: </span>
                                 </label>
-                                <input type="text" readOnly defaultValue={price} className="input input-bordered input-accent w-56 md:w-72" name='price' />
+                                <input type="text" readOnly id="bikePrice" defaultValue={bikeDetails[0]?.price} className="input input-bordered input-accent w-56 md:w-72" name='price' />
                             </div>
                             <div>
                                 <label className="label">

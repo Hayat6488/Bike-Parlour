@@ -6,8 +6,8 @@ import { AuthContext } from '../../../Context/AuthProvider';
 const Header = () => {
 
     const isAdmin = false;
-    const isBuyer = true;
-    const isSeller = false;
+    const isBuyer = false;
+    const isSeller = true;
     
 
     const {user, logOut} = useContext(AuthContext);

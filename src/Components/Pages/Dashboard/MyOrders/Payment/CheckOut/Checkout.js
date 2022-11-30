@@ -81,11 +81,11 @@ const Checkout = ({ product }) => {
                 email,
                 bookingId: _id
             }
-            fetch('https://doctors-portal-server-rust.vercel.app/payments', {
+            fetch('http://localhost:5000/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    // authorization: `bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(payment)
             })
@@ -108,6 +108,25 @@ const Checkout = ({ product }) => {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(update)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    console.log(data);                  
+                }
+            })
+
+            const updateBike = {
+                sold: true,
+                advertise: false
+            }
+            
+            fetch(`http://localhost:5000/myproducts/${productId}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updateBike)
         })
             .then(res => res.json())
             .then(data => {
