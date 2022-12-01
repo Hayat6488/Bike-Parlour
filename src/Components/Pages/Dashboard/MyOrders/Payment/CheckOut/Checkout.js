@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import toast from 'react-hot-toast';
 
 const Checkout = ({ product }) => {
 
@@ -52,6 +53,9 @@ const Checkout = ({ product }) => {
             setCardError('');
         }
 
+        setSuccess('');
+        setProcessing(true);
+
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
             clientSecret,
             {
@@ -73,6 +77,7 @@ const Checkout = ({ product }) => {
         console.log('payment-intent', paymentIntent);
 
         if (paymentIntent.status === "succeeded") {
+            toast.success('Payment Successful');
             console.log('card info', card);
             // store payment info in the database
             const payment = {
@@ -103,37 +108,37 @@ const Checkout = ({ product }) => {
             }
 
             fetch(`http://localhost:5000/myorders/products/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(update)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    console.log(data);                  
-                }
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(update)
             })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        console.log(data);
+                    }
+                })
 
             const updateBike = {
                 sold: true,
                 advertise: false
             }
-            
+
             fetch(`http://localhost:5000/myproducts/${productId}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(updateBike)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    console.log(data);                  
-                }
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(updateBike)
             })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount > 0) {
+                        console.log(data);
+                    }
+                })
 
 
         }
@@ -166,6 +171,12 @@ const Checkout = ({ product }) => {
             <div>
                 <h1 className='text-red-500'>{cardError}</h1>
             </div>
+            {
+                success && <div>
+                    <p className='text-green-500'>{success}</p>
+                    <p>Your transactionId: <span className='font-bold'>{transactionId}</span></p>
+                </div>
+            }
         </>
     );
 };
