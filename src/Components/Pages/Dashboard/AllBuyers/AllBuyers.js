@@ -1,4 +1,6 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
+import { AuthContext } from '../../../Context/AuthProvider';
+import useAdmin from '../../../hooks/useAdmin';
 import Buyer from './Buyer';
 
 const AllBuyers = () => {
@@ -7,11 +9,27 @@ const AllBuyers = () => {
 
     const [buyers, setBuyers] = useState([]);
 
+    // const [userUid, setUserUid] = useState();
+
+    const {user} = useContext(AuthContext);
+
+    // setUserUid(user?.uid);
+
+    // const [isAdmin, isAdminLoading] = useAdmin(userUid);
+
     useEffect(() => {
-       fetch('http://localhost:5000/users/buyer')
+       fetch('http://localhost:5000/users/buyer', {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+       })
        .then(res => res.json())
        .then(data => setBuyers(data))
     },[ignored]) 
+
+    
+
+
 
     return (
         <div className='flex justify-center w-full'>

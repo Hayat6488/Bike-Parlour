@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 import { AuthContext } from '../../Context/AuthProvider';
 
 const Register = () => {
+
+    const navigate = useNavigate();
 
     const [img, setImg] = useState();
 
@@ -64,7 +66,6 @@ const Register = () => {
                 const user = result.user;
                 const uid = user.uid;
                 saveUser(uid);
-                getUserToken(uid);
                 form.reset();
             })
             .catch(error => console.error('error: ', error))
@@ -74,15 +75,17 @@ const Register = () => {
             .then(res => res.json())
             .then(data => {
                 setUser(data[0]);
+                getUserToken(uid);
             })
         }
 
         const getUserToken = uid => {
-            fetch(`http://localhost:5000/jwts?uid=${uid}`)
+            fetch(`http://localhost:5000/jwt?uid=${uid}`)
             .then(res => res.json())
             .then(data => {
                 if(data?.accessToken){
                     localStorage.setItem('accessToken', data.accessToken);
+                    navigate('/');
                 }
             })
         }

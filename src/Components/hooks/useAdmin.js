@@ -5,7 +5,7 @@ const useAdmin = (uid) => {
     const [isAdminLoading, setIsAdminLoading] = useState(true);
     useEffect(() => {
         if (uid) {
-            fetch(`https://doctors-portal-server-rust.vercel.app/users/admin/${uid}`)
+            fetch(`http://localhost:5000/users/admin/${uid}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsAdmin(data.isAdmin);

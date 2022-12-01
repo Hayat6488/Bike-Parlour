@@ -10,10 +10,11 @@ const Row = ({ product, forceUpdate }) => {
             advertise: true
         }
 
-        fetch(`http://localhost:5000/myproducts/${_id}`, {
+        fetch(`http://localhost:5000/myproducts/advert/${_id}`, {
             method: 'PUT',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(update)
         })
@@ -33,7 +34,8 @@ const Row = ({ product, forceUpdate }) => {
         const proceed = window.confirm('Are you sure you want to delete this Product?');
         if (proceed) {
             fetch(`http://localhost:5000/myproducts/${_id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             })
                 .then(res => res.json())
                 .then(data => {

@@ -8,7 +8,10 @@ const Buyer = ({ buyer, forceUpdate }) => {
         const proceed = window.confirm('Are you sure you want to delete this Product?');
         if (proceed) {
             fetch(`http://localhost:5000/users/buyer/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {

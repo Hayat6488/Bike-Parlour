@@ -90,7 +90,7 @@ const Checkout = ({ product }) => {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
-                    // authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(payment)
             })
@@ -110,7 +110,8 @@ const Checkout = ({ product }) => {
             fetch(`http://localhost:5000/myorders/products/${_id}`, {
                 method: 'PUT',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(update)
             })
@@ -129,7 +130,8 @@ const Checkout = ({ product }) => {
             fetch(`http://localhost:5000/myproducts/${productId}`, {
                 method: 'PUT',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(updateBike)
             })

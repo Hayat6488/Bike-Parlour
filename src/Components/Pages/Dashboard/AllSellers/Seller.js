@@ -8,7 +8,10 @@ const Seller = ({ seller, forceUpdate }) => {
         const proceed = window.confirm('Are you sure you want to delete this Product?');
         if (proceed) {
             fetch(`http://localhost:5000/users/seller/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -28,7 +31,8 @@ const Seller = ({ seller, forceUpdate }) => {
         fetch(`http://localhost:5000/users/seller/${id}`, {
             method: 'PUT',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(update)
         })

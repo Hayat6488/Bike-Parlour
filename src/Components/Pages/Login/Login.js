@@ -32,9 +32,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 const uid = (user.uid);
-                getUserToken(uid);
                 getUser(uid);
-                navigate('/');
             })
             .catch(error => console.error('error: ', error))
 
@@ -44,17 +42,19 @@ const Login = () => {
                 .then(res => res.json())
                 .then(data => {
                     setUser(data[0]);
+                    getUserToken(uid);
                 })
         }
 
         const getUserToken = uid => {
             fetch(`http://localhost:5000/jwt?uid=${uid}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data?.accessToken) {
-                        localStorage.setItem('accessToken', data.accessToken);
-                    }
-                })
+            .then(res => res.json())
+            .then(data => {
+                if(data?.accessToken){
+                    localStorage.setItem('accessToken', data.accessToken);
+                    navigate('/');
+                }
+            })
         }
     }
 

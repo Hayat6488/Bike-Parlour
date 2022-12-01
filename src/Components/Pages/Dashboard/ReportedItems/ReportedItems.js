@@ -8,7 +8,11 @@ const ReportedItems = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/products/reported')
+        fetch('http://localhost:5000/products/reported',{
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
         .then(res => res.json())
         .then(data => setProducts(data));
     },[ignored])

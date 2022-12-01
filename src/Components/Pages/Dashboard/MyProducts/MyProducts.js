@@ -9,10 +9,14 @@ const MyProducts = () => {
 
     const { user } = useContext(AuthContext);
 
-    const { data: products, refetch,  isLoading } = useQuery({
+    const { data: products } = useQuery({
         queryKey: ['myproducts', ignored, user?.uid],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myproducts?uid=${user?.uid}`);
+            const res = await fetch(`http://localhost:5000/myproducts?uid=${user?.uid}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }

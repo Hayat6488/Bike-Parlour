@@ -10,8 +10,9 @@ const Product = ({ bike, forceUpdate }) => {
     const handleDelete = (_id) => {
         const proceed = window.confirm('Are you sure you want to delete this Product?');
         if (proceed) {
-            fetch(`http://localhost:5000/myproducts/${_id}`, {
-                method: 'DELETE'
+            fetch(`http://localhost:5000/reported/${_id}`, {
+                method: 'DELETE',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             })
                 .then(res => res.json())
                 .then(data => {

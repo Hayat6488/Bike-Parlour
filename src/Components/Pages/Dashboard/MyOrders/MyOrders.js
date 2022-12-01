@@ -11,7 +11,11 @@ const MyOrders = () => {
     const { data: products, refetch,  isLoading } = useQuery({
         queryKey: ['myorders', user?.uid],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myorders/${user?.uid}`);
+            const res = await fetch(`http://localhost:5000/myorders/${user?.uid}`,{
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
