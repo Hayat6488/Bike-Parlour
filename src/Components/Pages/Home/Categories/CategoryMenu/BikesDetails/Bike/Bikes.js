@@ -33,10 +33,30 @@ const Bikes = ({ bike, bikes, index }) => {
         bikePrice.defaultValue = bikeDetails[0]?.price;
     }
 
+    const handleReport = id => {
+        const update = {
+            report : true
+        }
+
+        fetch(`http://localhost:5000/products/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(update)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Reported This Product.')                   
+                }
+            })
+
+    }
 
 
     const handleBooking = event => {
-        
+
 
         event.preventDefault();
         const form = event.target;
@@ -98,8 +118,11 @@ const Bikes = ({ bike, bikes, index }) => {
                         <h1 className='text-lg font-semibold'>{bike?.verified}</h1>
                     </div>
                     <h1 className='text-lg font-semibold'>{des}</h1>
-                    <div className="card-actions">
-                        <label onClick={() => filterData(_id)} htmlFor="bookNow" className="btn btn-primary">Book Now</label>
+                    <div className='flex justify-between mt-1'>
+                        <button onClick={() => handleReport(_id)} className="btn btn-ghost btn-outlined">Report Item</button>
+                        <div className="card-actions">
+                            <label onClick={() => filterData(_id)} htmlFor="bookNow" className="btn btn-ghost">Book Now</label>
+                        </div>
                     </div>
                 </div>
             </div>
