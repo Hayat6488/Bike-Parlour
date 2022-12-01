@@ -8,9 +8,9 @@ const Header = () => {
     const isAdmin = true;
     const isBuyer = false;
     const isSeller = false;
-    
 
-    const {user, logOut} = useContext(AuthContext);
+
+    const { user, logOut } = useContext(AuthContext);
 
     const handleLogOut = () => {
         logOut()
@@ -31,7 +31,7 @@ const Header = () => {
                     {
                         user?.uid ?
                             <>
-                                {isAdmin && <Link to='/dashboard/allsellers' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                {isAdmin && <Link to='/dashboard/allbuyers' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
                                 {isBuyer && <Link to='/dashboard/myorders' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
                                 {isSeller && <Link to='/dashboard/myproducts' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
                                 <button onClick={handleLogOut} className="btn btn-ghost mr-4">LOG OUT</button>
@@ -50,8 +50,11 @@ const Header = () => {
                         {
                             user?.uid ?
                                 <>
-                                    <li><Link to='/myreviews' className='mr-4'>MY REVIEWS</Link></li>
-                                    <li><Link to='/addservices' className='mr-4'>ADD SERVICES</Link></li>
+                                    <li>
+                                        {isAdmin && <Link to='/dashboard/allbuyers' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                        {isBuyer && <Link to='/dashboard/myorders' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                        {isSeller && <Link to='/dashboard/myproducts' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                    </li>
                                     <li><button onClick={handleLogOut} className="btn btn-ghost mr-4">LOG OUT</button></li>
                                 </>
                                 :

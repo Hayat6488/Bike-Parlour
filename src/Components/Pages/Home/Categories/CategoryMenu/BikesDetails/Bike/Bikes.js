@@ -23,7 +23,6 @@ const Bikes = ({ bike, bikes, index }) => {
             });
     }, [bike?.sellerId])
 
-    console.log(seller[0]?.verified)
 
     const { buyPrice, condition, date, des, img, location, name, price, used, _id, sellerName } = bike;
 

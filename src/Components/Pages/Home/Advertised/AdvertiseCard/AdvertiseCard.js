@@ -1,15 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { MdVerified } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../Context/AuthProvider';
 
 const AdvertiseCard = ({ bike, bikes }) => {
+
+    const [seller, setSeller] = useState([]);
 
     const [bikeDetails, setBikeDetails] = useState([]);
 
     const navigate = useNavigate();
 
     const { user } = useContext(AuthContext)
+
 
     const { buyPrice, condition, date, des, img, location, name, number, price, used, year, _id, sellerName } = bike;
 
@@ -20,6 +24,14 @@ const AdvertiseCard = ({ bike, bikes }) => {
         setBikeDetails(result);
     }
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/user?uid=${bike?.sellerId}`)
+            .then(res => res.json())
+            .then(data => {
+                setSeller(data);
+            });
+    }, [bike?.sellerId])
+
     const bikeName = document.querySelector("#bikeName");
     const bikePrice = document.querySelector("#bikePrice");
 
@@ -29,6 +41,27 @@ const AdvertiseCard = ({ bike, bikes }) => {
 
     if (bikePrice) {
         bikePrice.defaultValue = bikeDetails[0]?.price;
+    }
+
+    const handleReport = id => {
+        const update = {
+            report: true
+        }
+
+        fetch(`http://localhost:5000/products/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(update)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Reported This Product.')
+                }
+            })
+
     }
 
 
@@ -75,28 +108,40 @@ const AdvertiseCard = ({ bike, bikes }) => {
 
     return (
         <div>
-            <div className="card bg-base-100 shadow-xl">
-                <figure>
-                    <img src={img} alt="Shoes" className="rounded-xl h-72 w-full" />
-                </figure>
-                <div className="card-body items-left text-left">
-                    <h2 className="card-title">{name}</h2>
-                    <h1 className='text-lg font-semibold'>{sellerName}</h1>
-                    <h1 className='text-lg font-semibold'>{location}</h1>
-                    <h2 className="card-title">Condition:  {condition}</h2>
-                    <div className='grid grid-cols-2'>
-                        <h1 className='text-lg font-semibold'>Price: {price} Tk</h1>
-                        <h1 className='text-lg font-semibold'>Original Price: {buyPrice}</h1>
-                        <h1 className='text-lg font-semibold'>Used: {used} years</h1>
-                        <h1 className='text-lg font-semibold'>{date}</h1>
-                        <h1 className='text-lg font-semibold'>{bike?.verified}</h1>
+            {seller[0]?.verified &&
+                <>
+                    <div className="card bg-base-100 shadow-xl">
+                        <figure>
+                            <img src={img} alt="Shoes" className="rounded-xl h-72 w-full" />
+                        </figure>
+                        <div className="card-body items-left text-left">
+                            <h2 className="card-title">{name}</h2>
+                            <div className='flex items-center'>
+                                <h1 className='mr-4 text-lg font-semibold'>{seller[0]?.name}</h1>
+                                {
+                                    seller[0]?.verified && <MdVerified></MdVerified>
+                                }
+                            </div>
+                            <h1 className='text-lg font-semibold'>{location}</h1>
+                            <h2 className="card-title">Condition:  {condition}</h2>
+                            <div className='grid grid-cols-2'>
+                                <h1 className='text-lg font-semibold'>Price: {price} Tk</h1>
+                                <h1 className='text-lg font-semibold'>Original Price: {buyPrice}</h1>
+                                <h1 className='text-lg font-semibold'>Used: {used} years</h1>
+                                <h1 className='text-lg font-semibold'>{date}</h1>
+                                <h1 className='text-lg font-semibold'>{bike?.verified}</h1>
+                            </div>
+                            <h1 className='text-lg font-semibold'>{des}</h1>
+                            <div className='flex justify-between mt-1'>
+                                <button onClick={() => handleReport(_id)} className="btn btn-ghost btn-outlined">Report Item</button>
+                                <div className="card-actions">
+                                    <label onClick={() => filterData(_id)} htmlFor="bookNow" className="btn btn-ghost">Book Now</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h1 className='text-lg font-semibold'>{des}</h1>
-                    <div className="card-actions">
-                        <label onClick={() => filterData(_id)} htmlFor="bookNow" className="btn btn-primary">Book Now</label>
-                    </div>
-                </div>
-            </div>
+                </>
+            }
             {/* Modal */}
 
 

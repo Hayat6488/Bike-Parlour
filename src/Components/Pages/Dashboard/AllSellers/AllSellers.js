@@ -1,16 +1,17 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import Buyer from './Buyer';
+import Buyer from '../AllBuyers/Buyer';
+import Seller from './Seller';
 
 const AllSellers = () => {
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
-    const [buyers, setBuyers] = useState([]);
+    const [seller, setSeller] = useState([]);
 
     useEffect(() => {
-       fetch('http://localhost:5000/users/buyer')
-       .then(res => res.json())
-       .then(data => setBuyers(data))
-    },[ignored]) 
+        fetch('http://localhost:5000/users/seller')
+            .then(res => res.json())
+            .then(data => setSeller(data))
+    }, [ignored])
 
     return (
         <div className='flex justify-center w-full'>
@@ -19,22 +20,22 @@ const AllSellers = () => {
                     <thead>
                         <tr>
                             <th><span className='text-xl'>Name</span></th>
-                            <th><span className='text-xl'>Price</span></th>
+                            <th><span className='text-xl'>Email</span></th>
                             <th><span className='text-xl'>Status</span></th>
-                            <th></th>
+                            <th><span className='text-xl'>Action</span></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            buyers[0]?.map(buyer => <Buyer key={buyer._id} buyer={buyer} forceUpdate={forceUpdate}></Buyer>)
+                            seller[0]?.map(seller => <Seller key={seller._id} seller={seller} forceUpdate={forceUpdate}></Seller>)
                         }
                     </tbody>
                     <tfoot>
                         <tr>
-                        <th><span className='text-xl'>Name</span></th>
-                            <th><span className='text-xl'>Price</span></th>
+                            <th><span className='text-xl'>Name</span></th>
+                            <th><span className='text-xl'>Email</span></th>
                             <th><span className='text-xl'>Status</span></th>
-                            <th></th>
+                            <th><span className='text-xl'>Action</span></th>
                         </tr>
                     </tfoot>
 

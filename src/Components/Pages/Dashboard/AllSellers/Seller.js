@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Buyer = ({ buyer, forceUpdate }) => {
+const Seller = ({ seller, forceUpdate }) => {
 
-    const { name, email, _id } = buyer;
+    const { name, email, _id } = seller;
 
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure you want to delete this Product?');
         if (proceed) {
-            fetch(`http://localhost:5000/users/buyer/${id}`, {
+            fetch(`http://localhost:5000/users/seller/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -25,7 +25,7 @@ const Buyer = ({ buyer, forceUpdate }) => {
             verified: true
         }
 
-        fetch(`http://localhost:5000/users/buyer/${id}`, {
+        fetch(`http://localhost:5000/users/seller/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -55,11 +55,13 @@ const Buyer = ({ buyer, forceUpdate }) => {
                 </div>
             </td>
             {
-                buyer?.verified ? <td><h1 className='text-green-500 text-xl'>Verified</h1></td> : <td><h1 className='text-red-700 text-xl'>Not Verified</h1></td>
+                seller?.verified ? <td><h1 className='text-green-500 text-xl'>Verified</h1></td> : <td><h1 className='text-red-700 text-xl'>Not Verified</h1></td>
             }
-            <td>
+            {
+                !seller?.verified && <td>
                 <button onClick={() => handleVerify(_id)} className='btn btn-ghost'>VERIFY</button>
             </td>
+            }
             <td>
                 <button onClick={() => handleDelete(_id)} className='btn btn-ghost'>DELETE</button>
             </td>
@@ -67,4 +69,4 @@ const Buyer = ({ buyer, forceUpdate }) => {
     );
 };
 
-export default Buyer;
+export default Seller;
