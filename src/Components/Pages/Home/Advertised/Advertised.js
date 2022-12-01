@@ -13,8 +13,6 @@ const Advertised = () => {
             });
     }, [])
 
-    console.log(products);
-
     return (
         <div>
             {

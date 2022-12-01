@@ -13,21 +13,15 @@ const AdvertiseCard = ({ bike, bikes }) => {
 
     const { buyPrice, condition, date, des, img, location, name, number, price, used, year, _id, sellerName } = bike;
 
-    console.log(bike);
-
     const filterData = (bikeId) => {
         var result = bikes.filter(obj => {
             return obj._id === bikeId;
         })
         setBikeDetails(result);
-        console.log(bikeDetails);
     }
 
     const bikeName = document.querySelector("#bikeName");
     const bikePrice = document.querySelector("#bikePrice");
-
-    console.log(bikeName);
-    console.log(bikePrice);
 
     if (bikeName) {
         bikeName.defaultValue = bikeDetails[0]?.name;
@@ -36,9 +30,6 @@ const AdvertiseCard = ({ bike, bikes }) => {
     if (bikePrice) {
         bikePrice.defaultValue = bikeDetails[0]?.price;
     }
-
-
-    console.log(bikeDetails[0]?.name);
 
 
 

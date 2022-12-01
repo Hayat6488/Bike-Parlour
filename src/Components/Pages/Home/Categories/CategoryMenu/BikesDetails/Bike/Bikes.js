@@ -5,17 +5,14 @@ import { AuthContext } from '../../../../../../Context/AuthProvider';
 
 const Bikes = ({ bike, bikes, index }) => {
 
+
     const [bikeDetails, setBikeDetails] = useState([]);
 
     const navigate = useNavigate();
 
     const { user } = useContext(AuthContext);
 
-    const { buyPrice, condition, date, des, img, location, name, number, price, used, year, _id, sellerName } = bike;
-
-    console.log(bike);
-
-    console.log(bikes);
+    const { buyPrice, condition, date, des, img, location, name, price, used, _id, sellerName } = bike;
 
 
     const filterData = (bikeId) => {
@@ -23,14 +20,10 @@ const Bikes = ({ bike, bikes, index }) => {
             return obj._id === bikeId;
         })
         setBikeDetails(result);
-        console.log(bikeDetails);
     }
 
     const bikeName = document.querySelector("#bikeName");
     const bikePrice = document.querySelector("#bikePrice");
-
-    console.log(bikeName);
-    console.log(bikePrice);
 
     if (bikeName) {
         bikeName.defaultValue = bikeDetails[0]?.name;
@@ -41,11 +34,10 @@ const Bikes = ({ bike, bikes, index }) => {
     }
 
 
-    console.log(bikeDetails[0]?.name);
-
-
 
     const handleBooking = event => {
+        
+
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
