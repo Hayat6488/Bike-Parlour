@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Bikes from './Bike/Bikes';
 

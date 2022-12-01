@@ -1,9 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { MdVerified } from 'react-icons/md'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../../../Context/AuthProvider';
 
 const Bikes = ({ bike, bikes, index }) => {
+
+    const [seller, setSeller] = useState([]);
 
 
     const [bikeDetails, setBikeDetails] = useState([]);
@@ -11,6 +14,16 @@ const Bikes = ({ bike, bikes, index }) => {
     const navigate = useNavigate();
 
     const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/user?uid=${bike?.sellerId}`)
+            .then(res => res.json())
+            .then(data => {
+                setSeller(data);
+            });
+    }, [bike?.sellerId])
+
+    console.log(seller[0]?.verified)
 
     const { buyPrice, condition, date, des, img, location, name, price, used, _id, sellerName } = bike;
 
@@ -35,7 +48,7 @@ const Bikes = ({ bike, bikes, index }) => {
 
     const handleReport = id => {
         const update = {
-            report : true
+            report: true
         }
 
         fetch(`http://localhost:5000/products/${_id}`, {
@@ -48,7 +61,7 @@ const Bikes = ({ bike, bikes, index }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    toast.success('Reported This Product.')                   
+                    toast.success('Reported This Product.')
                 }
             })
 
@@ -101,31 +114,40 @@ const Bikes = ({ bike, bikes, index }) => {
 
     return (
         <div>
-            <div className="card bg-base-100 shadow-xl">
-                <figure>
-                    <img src={img} alt="Shoes" className="rounded-xl h-72 w-full" />
-                </figure>
-                <div className="card-body items-left text-left">
-                    <h2 className="card-title">{name}</h2>
-                    <h1 className='text-lg font-semibold'>{sellerName}</h1>
-                    <h1 className='text-lg font-semibold'>{location}</h1>
-                    <h2 className="card-title">Condition:  {condition}</h2>
-                    <div className='grid grid-cols-2'>
-                        <h1 className='text-lg font-semibold'>Price: {price} Tk</h1>
-                        <h1 className='text-lg font-semibold'>Original Price: {buyPrice}</h1>
-                        <h1 className='text-lg font-semibold'>Used: {used} years</h1>
-                        <h1 className='text-lg font-semibold'>{date}</h1>
-                        <h1 className='text-lg font-semibold'>{bike?.verified}</h1>
-                    </div>
-                    <h1 className='text-lg font-semibold'>{des}</h1>
-                    <div className='flex justify-between mt-1'>
-                        <button onClick={() => handleReport(_id)} className="btn btn-ghost btn-outlined">Report Item</button>
-                        <div className="card-actions">
-                            <label onClick={() => filterData(_id)} htmlFor="bookNow" className="btn btn-ghost">Book Now</label>
+            {seller[0]?.verified &&
+                <>
+                    <div className="card bg-base-100 shadow-xl">
+                        <figure>
+                            <img src={img} alt="Shoes" className="rounded-xl h-72 w-full" />
+                        </figure>
+                        <div className="card-body items-left text-left">
+                            <h2 className="card-title">{name}</h2>
+                            <div className='flex items-center'>
+                                <h1 className='mr-4 text-lg font-semibold'>{seller[0]?.name}</h1>
+                                {
+                                    seller[0]?.verified && <MdVerified></MdVerified>
+                                }
+                            </div>
+                            <h1 className='text-lg font-semibold'>{location}</h1>
+                            <h2 className="card-title">Condition:  {condition}</h2>
+                            <div className='grid grid-cols-2'>
+                                <h1 className='text-lg font-semibold'>Price: {price} Tk</h1>
+                                <h1 className='text-lg font-semibold'>Original Price: {buyPrice}</h1>
+                                <h1 className='text-lg font-semibold'>Used: {used} years</h1>
+                                <h1 className='text-lg font-semibold'>{date}</h1>
+                                <h1 className='text-lg font-semibold'>{bike?.verified}</h1>
+                            </div>
+                            <h1 className='text-lg font-semibold'>{des}</h1>
+                            <div className='flex justify-between mt-1'>
+                                <button onClick={() => handleReport(_id)} className="btn btn-ghost btn-outlined">Report Item</button>
+                                <div className="card-actions">
+                                    <label onClick={() => filterData(_id)} htmlFor="bookNow" className="btn btn-ghost">Book Now</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </>
+            }
 
             {/* Modal */}
 

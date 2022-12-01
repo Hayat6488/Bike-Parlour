@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
@@ -11,6 +11,7 @@ const AddProduct = () => {
     const { user } = useContext(AuthContext);
 
     const handleAddProduct = event => {
+
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
