@@ -2,6 +2,7 @@ import React, { useContext, useReducer } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../Context/AuthProvider';
 import Row from './Row/Row';
+import { Helmet } from 'react-helmet';
 
 const MyProducts = () => {
 
@@ -50,6 +51,9 @@ const MyProducts = () => {
 
                 </table>
             </div>
+            <Helmet>
+                <title>BIKE PARLOUR: My Products</title>
+            </Helmet>
         </div>
     );
 };

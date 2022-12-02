@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import Buyer from '../AllBuyers/Buyer';
 import Seller from './Seller';
 
@@ -6,6 +7,8 @@ const AllSellers = () => {
     const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
     const [seller, setSeller] = useState([]);
+
+    // Load seller from Db
 
     useEffect(() => {
         fetch('http://localhost:5000/users/seller', {
@@ -45,6 +48,11 @@ const AllSellers = () => {
 
                 </table>
             </div>
+
+            <Helmet>
+                <title>BIKE PARLOUR: All Sellers</title>
+            </Helmet>
+
         </div>
     );
 };;

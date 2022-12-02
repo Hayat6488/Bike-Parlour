@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import { FcGoogle } from 'react-icons/fc'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
@@ -137,6 +138,9 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <Helmet>
+                <title>BIKE PARLOUR: LOGIN</title>
+            </Helmet>
         </div>
     );
 };

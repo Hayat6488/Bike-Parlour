@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+// find current loggen in user is admin or not
+
 const useAdmin = (uid) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [isAdminLoading, setIsAdminLoading] = useState(true);

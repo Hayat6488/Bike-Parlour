@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../Context/AuthProvider';
 import Row from '../MyProducts/Row/Row';
 import Rows from './Rows/Rows';
+import { Helmet } from 'react-helmet';
 
 const MyOrders = () => {
 
@@ -52,6 +53,10 @@ const MyOrders = () => {
 
                 </table>
             </div>
+
+            <Helmet>
+                <title>BIKE PARLOUR: My Orders</title>
+            </Helmet>
         </div>
     );
 };

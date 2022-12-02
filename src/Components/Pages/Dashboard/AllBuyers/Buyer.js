@@ -4,6 +4,8 @@ const Buyer = ({ buyer, forceUpdate }) => {
 
     const { name, email, _id } = buyer;
 
+    // Delete operation for buyers can be controlled by admin
+
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure you want to delete this Product?');
         if (proceed) {

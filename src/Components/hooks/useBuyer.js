@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+// find current loggen in user is buyer or not
+
 const useBuyer = (uid) => {
     const [isBuyer, setIsBuyer] = useState(false);
     const [isBuyerLoading, setIsBuyerLoading] = useState(true);

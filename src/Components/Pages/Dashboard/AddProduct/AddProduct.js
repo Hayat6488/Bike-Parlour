@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
+import { Helmet } from 'react-helmet';
 
 const AddProduct = () => {
 
@@ -29,6 +30,8 @@ const AddProduct = () => {
         const formData = new FormData();
         formData.append('image', image);
 
+        // Api for uploading image to imgBB
+
         const url = "https://api.imgbb.com/1/upload?key=047745c250b2bedf1b2b864ff6999ae2"
 
         fetch(url, {
@@ -41,6 +44,8 @@ const AddProduct = () => {
                 const img = data.data.url
                 sendToBackEnd(img);
             })
+
+            // Save the product data to backend
 
         const sendToBackEnd = (img) => {
 
@@ -181,7 +186,9 @@ const AddProduct = () => {
                 </div>
             </div>
 
-
+            <Helmet>
+                <title>BIKE PARLOUR: Add Product</title>
+            </Helmet>
         </div>
     );
 };

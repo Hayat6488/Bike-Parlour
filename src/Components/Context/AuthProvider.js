@@ -13,20 +13,28 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 
+    // Google Log In
+
     const signInByGoogle = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
+
+    // Sign up by email pass
 
     const signUp = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
+    // Log in by email pass
+
     const login = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password)
     }
+
+    // Log Out
 
     const logOut = () => {
         return signOut(auth)
@@ -39,10 +47,6 @@ const AuthProvider = ({children}) => {
         });
         return () => unSubscribe();
     }, [])
-
-    const handleUser = () => {
-        
-    }
 
 
 

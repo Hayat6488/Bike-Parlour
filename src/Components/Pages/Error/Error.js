@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import './Error.css'
 import pic from '../../Assets/error.png'
+import { Helmet } from 'react-helmet';
 
 const Error = () => {
 
@@ -14,6 +15,9 @@ const Error = () => {
                     স্যার!!! ভুল পথে আসলাম না তো.... আরেকবার একটু দেখে নিবেন নাকি!!!
                 </h2>
             </div>
+            <Helmet>
+                <title>BIKE PARLOUR: ERROR</title>
+            </Helmet>
         </div>
     );
 };

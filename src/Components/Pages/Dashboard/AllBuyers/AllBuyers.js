@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useReducer, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { AuthContext } from '../../../Context/AuthProvider';
 import useAdmin from '../../../hooks/useAdmin';
 import Buyer from './Buyer';
@@ -9,13 +10,8 @@ const AllBuyers = () => {
 
     const [buyers, setBuyers] = useState([]);
 
-    // const [userUid, setUserUid] = useState();
-
     const {user} = useContext(AuthContext);
-
-    // setUserUid(user?.uid);
-
-    // const [isAdmin, isAdminLoading] = useAdmin(userUid);
+//  Loading user data from mongoDb
 
     useEffect(() => {
        fetch('http://localhost:5000/users/buyer', {
@@ -57,6 +53,11 @@ const AllBuyers = () => {
 
                 </table>
             </div>
+
+            <Helmet>
+                <title>BIKE PARLOUR: All Buyers</title>
+            </Helmet>
+
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import Product from './Product';
 
 const ReportedItems = () => {
@@ -45,6 +46,9 @@ const ReportedItems = () => {
 
                 </table>
             </div>
+            <Helmet>
+                <title>BIKE PARLOUR: Reported Items</title>
+            </Helmet>
         </div>
     );
 };

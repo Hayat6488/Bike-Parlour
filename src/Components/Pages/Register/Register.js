@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 import { AuthContext } from '../../Context/AuthProvider';
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
 
@@ -193,7 +194,9 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-
+            <Helmet>
+                <title>BIKE PARLOUR: REGISTER</title>
+            </Helmet>
         </div>
     );
 };
