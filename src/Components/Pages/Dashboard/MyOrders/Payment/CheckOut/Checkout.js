@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import toast from 'react-hot-toast';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Checkout = ({ product }) => {
+
+    const navigate = useNavigate();
 
     const { price, name, email, productId, _id } = product;
 
@@ -138,7 +141,7 @@ const Checkout = ({ product }) => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.modifiedCount > 0) {
-                        console.log(data);
+                        navigate('/myorders');
                     }
                 })
 

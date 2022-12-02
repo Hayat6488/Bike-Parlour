@@ -12,7 +12,9 @@ const Product = ({ bike, forceUpdate }) => {
         if (proceed) {
             fetch(`http://localhost:5000/reported/${_id}`, {
                 method: 'DELETE',
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
