@@ -32,7 +32,7 @@ const Carousel = () => {
                 <div id="slide3" className="carousel-item relative w-full">
                     <img src={img3} alt="" className="w-full h-full" />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-20 top-1/2">
-                        <h1 className='text-4xl text-white text-left'>Upgrade your old <br /> Bike from BIKE PARLOUR.</h1>
+                        <h1 className='text-4xl text-white text-left'>Buy your dream <br /> Bike secondhand from BIKE PARLOUR.</h1>
                     </div>
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                         <a href="#slide2" className="btn btn-circle">❮</a>

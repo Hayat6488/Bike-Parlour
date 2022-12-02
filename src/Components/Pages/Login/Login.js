@@ -63,7 +63,7 @@ const Login = () => {
                 if(data?.accessToken){
                     console.log(data?.accessToken)
                     localStorage.setItem('accessToken', data.accessToken);
-                    navigate('/');
+                    navigate(from, { replace: true });
                 }
             })
         }
@@ -101,7 +101,7 @@ const Login = () => {
             .then(data => {
                 if(data?.accessToken){
                     localStorage.setItem('accessToken', data.accessToken);
-                    navigate('/');
+                    navigate(from, { replace: true });
                 }
             })
         }

@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { MdVerified } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../Context/AuthProvider';
+import { FcCheckmark } from 'react-icons/fc'
 
 const AdvertiseCard = ({ bike, bikes }) => {
 
@@ -119,7 +120,7 @@ const AdvertiseCard = ({ bike, bikes }) => {
                             <div className='flex items-center'>
                                 <h1 className='mr-4 text-lg font-semibold'>{seller[0]?.name}</h1>
                                 {
-                                    seller[0]?.verified && <MdVerified></MdVerified>
+                                    seller[0]?.verified && <FcCheckmark></FcCheckmark>
                                 }
                             </div>
                             <h1 className='text-lg font-semibold'>{location}</h1>

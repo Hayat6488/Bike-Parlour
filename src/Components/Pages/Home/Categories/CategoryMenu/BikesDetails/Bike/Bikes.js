@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { MdVerified } from 'react-icons/md'
+import { FcCheckmark } from 'react-icons/fc'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../../../Context/AuthProvider';
@@ -124,7 +124,7 @@ const Bikes = ({ bike, bikes, index }) => {
                             <div className='flex items-center'>
                                 <h1 className='mr-4 text-lg font-semibold'>{seller[0]?.name}</h1>
                                 {
-                                    seller[0]?.verified && <MdVerified></MdVerified>
+                                    seller[0]?.verified && <FcCheckmark></FcCheckmark>
                                 }
                             </div>
                             <h1 className='text-lg font-semibold'>{location}</h1>
