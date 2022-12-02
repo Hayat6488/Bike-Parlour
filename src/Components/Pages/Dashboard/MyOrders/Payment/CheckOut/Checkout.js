@@ -20,7 +20,7 @@ const Checkout = ({ product }) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://bike-parlour-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const Checkout = ({ product }) => {
                 email,
                 bookingId: _id
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://bike-parlour-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -110,7 +110,7 @@ const Checkout = ({ product }) => {
                 paid: true
             }
 
-            fetch(`http://localhost:5000/myorders/products/${_id}`, {
+            fetch(`https://bike-parlour-server.vercel.app/myorders/products/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
@@ -130,7 +130,7 @@ const Checkout = ({ product }) => {
                 advertise: false
             }
 
-            fetch(`http://localhost:5000/myproducts/${productId}`, {
+            fetch(`https://bike-parlour-server.vercel.app/myproducts/${productId}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',

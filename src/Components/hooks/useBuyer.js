@@ -7,7 +7,7 @@ const useBuyer = (uid) => {
     const [isBuyerLoading, setIsBuyerLoading] = useState(true);
     useEffect(() => {
         if (uid) {
-            fetch(`http://localhost:5000/users/buyer/${uid}`)
+            fetch(`https://bike-parlour-server.vercel.app/users/buyer/${uid}`)
                 .then(res => res.json())
                 .then(data => {
                     setIsBuyer(data.isBuyer);

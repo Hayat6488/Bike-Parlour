@@ -10,7 +10,7 @@ const Row = ({ product, forceUpdate }) => {
             advertise: true
         }
 
-        fetch(`http://localhost:5000/myproducts/advert/${_id}`, {
+        fetch(`https://bike-parlour-server.vercel.app/myproducts/advert/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -22,7 +22,7 @@ const Row = ({ product, forceUpdate }) => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     console.log(data);
-                    forceUpdate();                   
+                    forceUpdate();
                 }
             })
 
@@ -33,7 +33,7 @@ const Row = ({ product, forceUpdate }) => {
     const handleDelete = (_id) => {
         const proceed = window.confirm('Are you sure you want to delete this Product?');
         if (proceed) {
-            fetch(`http://localhost:5000/myproducts/${_id}`, {
+            fetch(`https://bike-parlour-server.vercel.app/myproducts/${_id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`

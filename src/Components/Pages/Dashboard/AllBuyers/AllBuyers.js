@@ -10,20 +10,20 @@ const AllBuyers = () => {
 
     const [buyers, setBuyers] = useState([]);
 
-    const {user} = useContext(AuthContext);
-//  Loading user data from mongoDb
+    const { user } = useContext(AuthContext);
+    //  Loading user data from mongoDb
 
     useEffect(() => {
-       fetch('http://localhost:5000/users/buyer', {
-        headers: {
-            authorization: `Bearer ${localStorage.getItem('accessToken')}`
-        }
-       })
-       .then(res => res.json())
-       .then(data => setBuyers(data))
-    },[ignored]) 
+        fetch('https://bike-parlour-server.vercel.app/users/buyer', {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => setBuyers(data))
+    }, [ignored])
 
-    
+
 
 
 
@@ -45,7 +45,7 @@ const AllBuyers = () => {
                     </tbody>
                     <tfoot>
                         <tr>
-                        <th><span className='text-xl'>Name</span></th>
+                            <th><span className='text-xl'>Name</span></th>
                             <th><span className='text-xl'>Email</span></th>
                             <th><span className='text-xl'>Status</span></th>
                         </tr>

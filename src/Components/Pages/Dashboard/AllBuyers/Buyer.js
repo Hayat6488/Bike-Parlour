@@ -9,7 +9,7 @@ const Buyer = ({ buyer, forceUpdate }) => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure you want to delete this Product?');
         if (proceed) {
-            fetch(`http://localhost:5000/users/buyer/${id}`, {
+            fetch(`https://bike-parlour-server.vercel.app/users/buyer/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`

@@ -9,14 +9,14 @@ const ReportedItems = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/products/reported',{
+        fetch('https://bike-parlour-server.vercel.app/products/reported', {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-        .then(res => res.json())
-        .then(data => setProducts(data));
-    },[ignored])
+            .then(res => res.json())
+            .then(data => setProducts(data));
+    }, [ignored])
 
     return (
         <div className='flex justify-center w-full'>
@@ -37,7 +37,7 @@ const ReportedItems = () => {
                     </tbody>
                     <tfoot>
                         <tr>
-                        <th><span className='ml-16 text-xl'>Name</span></th>
+                            <th><span className='ml-16 text-xl'>Name</span></th>
                             <th><span className='text-xl'>Price</span></th>
                             <th><span className='text-xl'>Action</span></th>
                             <th></th>

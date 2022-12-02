@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:name',
                 element: <PrivateRoutes><BikesDetails></BikesDetails></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.name}`)
+                loader: ({ params }) => fetch(`https://bike-parlour-server.vercel.app/categories/${params.name}`)
             },
             {
                 path: '/*',
@@ -82,7 +82,7 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myorders/:id',
                 element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/myorders/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://bike-parlour-server.vercel.app/myorders/products/${params.id}`)
             }
         ]
     }

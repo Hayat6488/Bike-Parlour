@@ -9,10 +9,10 @@ const MyOrders = () => {
 
     const { user } = useContext(AuthContext);
 
-    const { data: products, refetch,  isLoading } = useQuery({
+    const { data: products, refetch, isLoading } = useQuery({
         queryKey: ['myorders', user?.uid],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myorders/${user?.uid}`,{
+            const res = await fetch(`https://bike-parlour-server.vercel.app/myorders/${user?.uid}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -44,7 +44,7 @@ const MyOrders = () => {
                     </tbody>
                     <tfoot>
                         <tr>
-                        <th><span className='ml-16 text-xl'>Name</span></th>
+                            <th><span className='ml-16 text-xl'>Name</span></th>
                             <th><span className='text-xl'>Price</span></th>
                             <th><span className='text-xl'>Status</span></th>
                             <th></th>

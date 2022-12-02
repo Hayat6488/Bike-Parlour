@@ -45,7 +45,7 @@ const AddProduct = () => {
                 sendToBackEnd(img);
             })
 
-            // Save the product data to backend
+        // Save the product data to backend
 
         const sendToBackEnd = (img) => {
 
@@ -77,7 +77,7 @@ const AddProduct = () => {
                 sellerName: user?.name
             }
 
-            fetch('http://localhost:5000/bikes', {
+            fetch('https://bike-parlour-server.vercel.app/bikes', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

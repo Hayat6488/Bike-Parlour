@@ -13,7 +13,7 @@ const MyProducts = () => {
     const { data: products } = useQuery({
         queryKey: ['myproducts', ignored, user?.uid],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myproducts?uid=${user?.uid}`, {
+            const res = await fetch(`https://bike-parlour-server.vercel.app/myproducts?uid=${user?.uid}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -42,7 +42,7 @@ const MyProducts = () => {
                     </tbody>
                     <tfoot>
                         <tr>
-                        <th><span className='ml-16 text-xl'>Name</span></th>
+                            <th><span className='ml-16 text-xl'>Name</span></th>
                             <th><span className='text-xl'>Price</span></th>
                             <th><span className='text-xl'>Status</span></th>
                             <th></th>

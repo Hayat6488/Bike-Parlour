@@ -11,7 +11,7 @@ const AllSellers = () => {
     // Load seller from Db
 
     useEffect(() => {
-        fetch('http://localhost:5000/users/seller', {
+        fetch('https://bike-parlour-server.vercel.app/users/seller', {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }

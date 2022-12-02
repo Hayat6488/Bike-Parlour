@@ -26,7 +26,7 @@ const AdvertiseCard = ({ bike, bikes }) => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/user?uid=${bike?.sellerId}`)
+        fetch(`https://bike-parlour-server.vercel.app/user?uid=${bike?.sellerId}`)
             .then(res => res.json())
             .then(data => {
                 setSeller(data);
@@ -49,7 +49,7 @@ const AdvertiseCard = ({ bike, bikes }) => {
             report: true
         }
 
-        fetch(`http://localhost:5000/products/${_id}`, {
+        fetch(`https://bike-parlour-server.vercel.app/products/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -89,7 +89,7 @@ const AdvertiseCard = ({ bike, bikes }) => {
             img: img
         }
 
-        fetch('http://localhost:5000/myorders', {
+        fetch('https://bike-parlour-server.vercel.app/myorders', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

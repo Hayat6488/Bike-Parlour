@@ -24,7 +24,7 @@ const Register = () => {
             .catch(error => console.error('error: ', error))
     }
 
-    const saveUserToDB= (user) => {
+    const saveUserToDB = (user) => {
         console.log(user);
         const userData = {
             name: user?.displayName,
@@ -33,38 +33,38 @@ const Register = () => {
             role: 'Buyer',
             uid: user?.uid
         }
-        fetch(`http://localhost:5000/users`, {
+        fetch(`https://bike-parlour-server.vercel.app/users`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(userData)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            getUserFromDB(userData?.uid);
-        })
-
-        const getUserFromDB = (uid) => {
-            fetch(`http://localhost:5000/user?uid=${uid}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data[0])
-                setUser(data[0]);
-                getUserTokenFromDB(data[0].uid);
+                console.log(data);
+                getUserFromDB(userData?.uid);
             })
+
+        const getUserFromDB = (uid) => {
+            fetch(`https://bike-parlour-server.vercel.app/user?uid=${uid}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data[0])
+                    setUser(data[0]);
+                    getUserTokenFromDB(data[0].uid);
+                })
         }
 
         const getUserTokenFromDB = uid => {
-            fetch(`http://localhost:5000/jwt?uid=${uid}`)
-            .then(res => res.json())
-            .then(data => {
-                if(data?.accessToken){
-                    localStorage.setItem('accessToken', data.accessToken);
-                    navigate('/');
-                }
-            })
+            fetch(`https://bike-parlour-server.vercel.app/jwt?uid=${uid}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data?.accessToken) {
+                        localStorage.setItem('accessToken', data.accessToken);
+                        navigate('/');
+                    }
+                })
         }
 
 
@@ -90,7 +90,7 @@ const Register = () => {
             .then(res => res.json())
             .then(data => setImg(data.data.url))
 
-        const saveUser= (uid) => {
+        const saveUser = (uid) => {
             const user = {
                 name: name,
                 email: email,
@@ -98,17 +98,17 @@ const Register = () => {
                 role: role,
                 uid: uid
             }
-            fetch(`http://localhost:5000/users`, {
+            fetch(`https://bike-parlour-server.vercel.app/users`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify(user)
             })
-            .then(res => res.json())
-            .then(data => {
-                getUser(uid);
-            })
+                .then(res => res.json())
+                .then(data => {
+                    getUser(uid);
+                })
         }
 
         signUp(email, password)
@@ -121,23 +121,23 @@ const Register = () => {
             .catch(error => console.error('error: ', error))
 
         const getUser = (uid) => {
-            fetch(`http://localhost:5000/user?uid=${uid}`)
-            .then(res => res.json())
-            .then(data => {
-                setUser(data[0]);
-                getUserToken(uid);
-            })
+            fetch(`https://bike-parlour-server.vercel.app/user?uid=${uid}`)
+                .then(res => res.json())
+                .then(data => {
+                    setUser(data[0]);
+                    getUserToken(uid);
+                })
         }
 
         const getUserToken = uid => {
-            fetch(`http://localhost:5000/jwt?uid=${uid}`)
-            .then(res => res.json())
-            .then(data => {
-                if(data?.accessToken){
-                    localStorage.setItem('accessToken', data.accessToken);
-                    navigate('/');
-                }
-            })
+            fetch(`https://bike-parlour-server.vercel.app/jwt?uid=${uid}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data?.accessToken) {
+                        localStorage.setItem('accessToken', data.accessToken);
+                        navigate('/');
+                    }
+                })
         }
     }
 

@@ -9,7 +9,7 @@ const Seller = ({ seller, forceUpdate }) => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure you want to delete this Product?');
         if (proceed) {
-            fetch(`http://localhost:5000/users/seller/${id}`, {
+            fetch(`https://bike-parlour-server.vercel.app/users/seller/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -30,7 +30,7 @@ const Seller = ({ seller, forceUpdate }) => {
             verified: true
         }
 
-        fetch(`http://localhost:5000/users/seller/${id}`, {
+        fetch(`https://bike-parlour-server.vercel.app/users/seller/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -42,7 +42,7 @@ const Seller = ({ seller, forceUpdate }) => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     console.log(data);
-                    forceUpdate();                   
+                    forceUpdate();
                 }
             })
 
@@ -65,8 +65,8 @@ const Seller = ({ seller, forceUpdate }) => {
             }
             {
                 !seller?.verified && <td>
-                <button onClick={() => handleVerify(_id)} className='btn btn-ghost'>VERIFY</button>
-            </td>
+                    <button onClick={() => handleVerify(_id)} className='btn btn-ghost'>VERIFY</button>
+                </td>
             }
             <td>
                 <button onClick={() => handleDelete(_id)} className='btn btn-ghost'>DELETE</button>
