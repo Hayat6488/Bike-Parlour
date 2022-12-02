@@ -108,7 +108,7 @@ const AdvertiseCard = ({ bike, bikes }) => {
 
     return (
         <div>
-            {seller[0]?.verified &&
+            {seller[0] &&
                 <>
                     <div className="card bg-base-100 shadow-xl">
                         <figure>

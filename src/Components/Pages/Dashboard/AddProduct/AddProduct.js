@@ -26,8 +26,6 @@ const AddProduct = () => {
         const description = form.description.value;
         const image = form.picture.files[0];
 
-        const date = new Date();
-
         const formData = new FormData();
         formData.append('image', image);
 
@@ -46,6 +44,17 @@ const AddProduct = () => {
 
         const sendToBackEnd = (img) => {
 
+
+            const date = new Date();
+
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+
+            let currentDate = `${day}-${month}-${year}`;
+
+
+
             const bike = {
                 name: name,
                 condition: condition,
@@ -54,7 +63,7 @@ const AddProduct = () => {
                 price: price,
                 category: category,
                 buyPrice: buyPrice,
-                date: date,
+                date: currentDate,
                 used: used,
                 des: description,
                 img: img,

@@ -35,7 +35,9 @@ const Row = ({ product, forceUpdate }) => {
         if (proceed) {
             fetch(`http://localhost:5000/myproducts/${_id}`, {
                 method: 'DELETE',
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {

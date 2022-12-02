@@ -113,7 +113,7 @@ const Bikes = ({ bike, bikes, index }) => {
 
     return (
         <div>
-            {seller[0]?.verified &&
+            {seller[0] &&
                 <>
                     <div className="card bg-base-100 shadow-xl">
                         <figure>
@@ -137,6 +137,7 @@ const Bikes = ({ bike, bikes, index }) => {
                                 <h1 className='text-lg font-semibold'>{bike?.verified}</h1>
                             </div>
                             <h1 className='text-lg font-semibold'>{des}</h1>
+
                             <div className='flex justify-between mt-1'>
                                 <button onClick={() => handleReport(_id)} className="btn btn-ghost btn-outlined">Report Item</button>
                                 <div className="card-actions">

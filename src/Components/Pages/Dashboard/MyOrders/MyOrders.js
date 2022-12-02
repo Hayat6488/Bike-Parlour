@@ -21,6 +21,8 @@ const MyOrders = () => {
         }
     })
 
+    console.log(products);
+
 
     return (
         <div className='flex justify-center w-full'>

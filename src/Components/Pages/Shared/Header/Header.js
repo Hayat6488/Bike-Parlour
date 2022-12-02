@@ -2,15 +2,20 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../Assets/photo_6055203949880914485_x-removebg-preview (2).png'
 import { AuthContext } from '../../../Context/AuthProvider';
+import useAdmin from '../../../hooks/useAdmin';
+import useBuyer from '../../../hooks/useBuyer';
+import useSeller from '../../../hooks/useSeller';
 
 const Header = () => {
 
-    const isAdmin = true;
-    const isBuyer = false;
-    const isSeller = false;
-
-
     const { user, logOut } = useContext(AuthContext);
+
+    const isAdmin = useAdmin(user?.uid);
+    const isBuyer = useBuyer(user?.uid);
+    const isSeller = useSeller(user?.uid);
+
+
+    
 
     const handleLogOut = () => {
         logOut()
@@ -31,9 +36,9 @@ const Header = () => {
                     {
                         user?.uid ?
                             <>
-                                {isAdmin && <Link to='/dashboard/allbuyers' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
-                                {isBuyer && <Link to='/dashboard/myorders' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
-                                {isSeller && <Link to='/dashboard/myproducts' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                {isAdmin[0] && <Link to='/dashboard/allbuyers' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                {isBuyer[0] && <Link to='/dashboard/myorders' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                {isSeller[0] && <Link to='/dashboard/myproducts' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
                                 <button onClick={handleLogOut} className="btn btn-ghost mr-4">LOG OUT</button>
                             </>
                             :
@@ -51,9 +56,9 @@ const Header = () => {
                             user?.uid ?
                                 <>
                                     <li>
-                                        {isAdmin && <Link to='/dashboard/allbuyers' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
-                                        {isBuyer && <Link to='/dashboard/myorders' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
-                                        {isSeller && <Link to='/dashboard/myproducts' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                        {isAdmin[0] && <Link to='/dashboard/allbuyers' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                        {isBuyer[0] && <Link to='/dashboard/myorders' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
+                                        {isSeller[0] && <Link to='/dashboard/myproducts' className='mr-4'><button className="btn btn-ghost">DASHBOARD</button></Link>}
                                     </li>
                                     <li><button onClick={handleLogOut} className="btn btn-ghost mr-4">LOG OUT</button></li>
                                 </>
