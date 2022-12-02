@@ -11,7 +11,7 @@ const Footer = () => {
                     <Link>Terms & Conditions</Link>
                 </div>
                 <div>
-                    <p>Copyright © 2022 - All right reserved by DHEKUR | Taste of Bangladesh</p>
+                    <p>Copyright © 2022 - All right reserved by BIKE PARLOUR | CHOOSE YOUR DREAM BIKE</p>
                 </div>
             </footer>
         </div>

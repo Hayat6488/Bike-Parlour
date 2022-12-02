@@ -15,11 +15,60 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         signInByGoogle()
             .then(result => {
+                console.log(result);
                 const user = result.user;
-                navigate('/');
+                console.log(user);
                 setUser(user);
+                saveUserToDB(user);
             })
             .catch(error => console.error('error: ', error))
+    }
+
+    const saveUserToDB= (user) => {
+        console.log(user);
+        const userData = {
+            name: user?.displayName,
+            email: user?.email,
+            image: user?.imgURL,
+            role: 'Buyer',
+            uid: user?.uid
+        }
+        fetch(`http://localhost:5000/users`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            getUserFromDB(userData?.uid);
+        })
+
+        const getUserFromDB = (uid) => {
+            fetch(`http://localhost:5000/user?uid=${uid}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data[0])
+                setUser(data[0]);
+                getUserTokenFromDB(data[0].uid);
+            })
+        }
+
+        const getUserTokenFromDB = uid => {
+            fetch(`http://localhost:5000/jwt?uid=${uid}`)
+            .then(res => res.json())
+            .then(data => {
+                if(data?.accessToken){
+                    console.log(data?.accessToken)
+                    localStorage.setItem('accessToken', data.accessToken);
+                    navigate('/');
+                }
+            })
+        }
+
+
     }
 
     const handleLogIn = (event) => {
