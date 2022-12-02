@@ -14,7 +14,7 @@ const Categories = () => {
     }, [])
 
     return (
-        <div className='mx-36 mt-16'>
+        <div className='mx-2 md:mx-6 lg:mx-36 '>
             <h1 className='text-3xl font-semibold mb-8'>Types of Bikes We Provide</h1>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3'>
 

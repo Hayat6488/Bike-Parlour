@@ -29,7 +29,7 @@ const Login = () => {
         console.log(user);
         const userData = {
             name: user?.displayName,
-            email: user?.email,
+            email: user?.email || 'Google User',
             image: user?.imgURL,
             role: 'Buyer',
             uid: user?.uid
